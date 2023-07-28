@@ -1,23 +1,45 @@
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :(global.Drawflow = factory());
+}(this, (function () { 
+'use strict';
+console.log('111');
+class AAA{
+  constructor(con){
+    this.con = con;
+  }
+  start(){
+    console.log('AAA..start');
+  }
+}
 /*
 * 流程
+* 
+* 事件：鼠标事件、触摸事件、键盘事件
+* 
+* 连线: reroute
+* 
+* 图形: 
+*  
+* 输入、输出： 
+*
 */
-export default class Drawflow {
-
+class Drawflow {
   /*
   *  构造函数 
   *  
   */
   constructor(container, render = null, parent = null) {
     this.events = {}; 
-    this.container = container;
+    this.container = container; //dom
     this.precanvas = null;
     this.nodeId = 1;
     this.ele_selected = null;
     this.node_selected = null;
     this.drag = false;
-    this.reroute = false;
+    this.reroute = false; //线路
     this.reroute_fix_curvature = false;
-    this.curvature = 0.5;
+    this.curvature = 0.5; //曲率
     this.reroute_curvature_start_end = 0.5;
     this.reroute_curvature = 0.5;
     this.reroute_width = 6;
@@ -83,6 +105,9 @@ export default class Drawflow {
     this.container.addEventListener('touchmove', this.position.bind(this));
     this.container.addEventListener('touchstart', this.click.bind(this));
 
+    /*
+    *  右链菜单
+    */
     /* Context Menu */
     this.container.addEventListener('contextmenu', this.contextmenu.bind(this));
     /* Delete */
@@ -1970,3 +1995,7 @@ export default class Drawflow {
         return uuid;
     }
 }
+
+return { Drawflow,AAA};
+
+})));
